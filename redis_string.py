@@ -17,3 +17,13 @@ r.incr('views')
 r.incrby('views',10)
 print(r.delete("views"))
 print(r.get('views'))
+
+print(r.msetnx({
+    "user:99": "John",
+    "user:98": "Peter"
+}))
+
+print(r.mget({
+    "user:99" ,
+    "user:98"
+}))

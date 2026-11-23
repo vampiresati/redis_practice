@@ -18,3 +18,26 @@
 # HGETALL employee:101
 # DEL employee:101
 
+import redis
+r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+r.hset(
+    "user:101",
+    mapping={
+        "name": "Satvir",
+        "age": 36,
+        "department": "IT",
+        "salary": 50000
+    }
+)
+
+print(r.hget("user:101", "name"))
+print(r.hgetall("user:101"))
+print(r.hexists("user:101", "name"))
+print(r.hkeys("user:101"))
+print(r.hvals("user:101"))
+print(r.hincrby("user:101", "salary", 5000))
+print(r.hincrbyfloat("user:101", "salary", 100.50))
+print(r.hstrlen("user:101", "name"))
+r.hdel("user:101", "age")
+print(r.hgetall("user:101"))
+r.delete("user:101")

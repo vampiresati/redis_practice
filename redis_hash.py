@@ -29,7 +29,6 @@ r.hset(
         "salary": 50000
     }
 )
-
 print(r.hget("user:101", "name"))
 print(r.hgetall("user:101"))
 print(r.hexists("user:101", "name"))

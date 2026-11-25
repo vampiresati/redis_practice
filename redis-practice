@@ -1,0 +1,172 @@
+# ==========================================
+# 1. BASIC SET AND GET
+# ==========================================
+
+SET message "Hi there!"
+GET message
+
+
+# ==========================================
+# 2. SET WITH GET OPTION
+# ==========================================
+
+SET color red
+SET color green GET
+GET color
+
+
+# ==========================================
+# 3. XX - SET ONLY IF KEY EXISTS
+# ==========================================
+
+SET color "hi there" XX
+GET color
+
+
+# ==========================================
+# 4. NX - SET ONLY IF KEY DOES NOT EXIST
+# ==========================================
+
+SET colorlaksjdf blue NX
+GET colorlaksjdf
+
+
+# ==========================================
+# 5. EX - SET WITH EXPIRATION (SECONDS)
+# ==========================================
+
+SET color red EX 2
+GET color
+
+# Run after 2 seconds
+GET color
+
+
+# ==========================================
+# 6. SETEX - SET WITH EXPIRATION
+# ==========================================
+
+SETEX color 2 red
+GET color
+
+
+# ==========================================
+# 7. MSET - SET MULTIPLE KEY-VALUE PAIRS
+# ==========================================
+
+MSET color red model toyota
+GET color
+GET model
+
+
+# ==========================================
+# 8. MGET - GET MULTIPLE VALUES
+# ==========================================
+
+MGET color model
+
+
+# ==========================================
+# 9. DEL - DELETE KEY
+# ==========================================
+
+GET color
+DEL color
+GET color
+
+
+# ==========================================
+# 10. GETRANGE - GET PART OF STRING
+# ==========================================
+
+GET model
+GETRANGE model 0 2
+
+
+# ==========================================
+# 11. SETRANGE - OVERWRITE PART OF STRING
+# ==========================================
+
+SETRANGE model 2 blue
+GET model
+
+
+# ==========================================
+# 12. NUMERIC OPERATIONS
+# ==========================================
+
+SET age 20
+GET age
+
+
+# INCR - INCREASE BY 1
+INCR age
+GET age
+
+
+# DECR - DECREASE BY 1
+DECR age
+GET age
+
+
+# INCRBY - INCREASE BY AMOUNT
+INCRBY age 20
+GET age
+
+
+# DECRBY - DECREASE BY AMOUNT
+DECRBY age 4
+GET age
+
+
+# INCRBYFLOAT - INCREASE/DECREASE DECIMAL
+INCRBYFLOAT age -3.333
+GET age
+
+
+# ==========================================
+# 13. ADDITIONAL USEFUL COMMANDS
+# ==========================================
+
+# Check if key exists
+EXISTS age
+
+# Check key data type
+TYPE age
+
+# Check remaining expiration time
+TTL color
+
+# Remove expiration
+PERSIST color
+
+# List keys (practice only)
+KEYS *
+
+# Get total number of keys
+DBSIZE
+
+
+# ==========================================
+# 14. BANK BALANCE EXAMPLE
+# ==========================================
+
+SET account:101:balance 1000
+
+INCRBY account:101:balance 500
+
+DECRBY account:101:balance 200
+
+GET account:101:balance
+
+
+# ==========================================
+# 15. CLEANUP (CAUTION)
+# ==========================================
+
+# Delete one key
+DEL message
+
+# Delete all keys in current database
+# CAUTION: Deletes all data in the selected database!
+FLUSHDB
